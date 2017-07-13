@@ -1,0 +1,471 @@
+karyotype = chapman_repaired.tsv.karyo.txt.wheat, chapman_bands.txt
+chromosomes_units = 100
+chromosomes_order = chr1A,chr1B,chr1D,chr2A,chr2B,chr2D,chr3A,chr3B,chr3D,chr4A,chr4B,chr4D,chr5A,chr5B,chr5D,chr6A,chr6B,chr6D,chr7A,chr7B,chr7D
+
+<colors>
+chr1A=0,204,204
+chr2A=34,212,212
+chr3A=68,221,221
+chr4A=102,229,229
+chr5A=136,238,238
+chr6A=170,246,246
+chr7A=204,255,255
+chr1B=0,204,204
+chr2B=34,212,212
+chr3B=68,221,221
+chr4B=102,229,229
+chr5B=136,238,238
+chr6B=170,246,246
+chr7B=204,255,255
+chr1D=0,204,204
+chr2D=34,212,212
+chr3D=68,221,221
+chr4D=102,229,229
+chr5D=136,238,238
+chr6D=170,246,246
+chr7D=204,255,255
+</colors>
+
+
+
+<ideogram>
+	<spacing>
+		default = 0.005r
+		<pairwise chr1D chr2A>
+			spacing = 5r
+		</pairwise>
+		<pairwise chr2D chr3A>
+			spacing = 5r
+		</pairwise>
+		<pairwise chr3D chr4A>
+			spacing = 5r
+		</pairwise>
+		<pairwise chr4D chr5A>
+			spacing = 5r
+		</pairwise>
+		<pairwise chr5D chr6A>
+			spacing = 5r
+		</pairwise>
+		<pairwise chr6D chr7A>
+			spacing = 5r
+		</pairwise>
+		<pairwise chr7D chr1A>
+			spacing = 5r
+		</pairwise>
+	</spacing>
+
+	#Ideogram position, fill and outline
+	radius           = 0.45r
+	thickness        = 75p
+	fill             = yes
+	fill_color       = black
+	stroke_color     = black
+	stroke_thickness = 0p
+
+	# Minimum definition for ideogram labels.
+	show_label       = yes
+	# see etc/fonts.conf for list of font names
+	label_font       = default
+	label_radius = 1.6r # 1.7r
+	label_size       = 80
+	label_parallel   = yes
+
+  # Bands definition
+	show_bands = yes
+	fill_bands = yes
+	band_stroke_thickness = 2p
+	band_stroke_color     = black
+	band_transparency     = 10
+
+
+</ideogram>
+
+show_ticks          = no # yes
+show_tick_labels    = yes
+show_grid  = yes
+
+<ticks>
+ color = black
+ thickness = 4p
+ multiplier = 1e-4
+ format = %.2f
+	<tick>
+		radius         = 1.53r
+		spacing        = 1000u
+		size           = 20p
+		show_label     = no
+		label_size     = 30p
+		label_offset   = 10p
+		format         = %.2f
+		label_thickness  = 5p
+	</tick>
+	<tick>
+		radius         = 1.53r
+		spacing        = 200u
+		size           = 15p
+		show_label     = no
+		label_size     = 30p
+		label_offset   = 10p
+		format         = %.2f
+		label_thickness  = 5p
+		color = grey
+	</tick>
+	<tick>
+		radius         = 1.53r
+		spacing        = 100u
+		size           = 25p
+		show_label     = yes
+		label_size     = 30p
+		label_offset   = 10p
+		format         = %.2f
+		label_thickness  = 5p
+		color = grey
+	</tick>
+</ticks>
+
+
+# PLOTS
+
+<plots>
+
+	### UNIQUE GENES PER BIN / MB
+
+	<plot>
+		show = yes
+		type = heatmap
+		file = unique_genes_per_mbp_mapped # uniq_genes_per_bin_mb
+		r0 = 1.01r
+		r1 = 1.06r
+		min = 0
+		max = 50 # 51 # 10 # 130
+		#color = eval(sprintf("greys-9-seq", remap_round(counter(plot),0,130,1,9)))
+		color = eval(sprintf("greys-9-seq", remap_round(counter(plot),0,50,1,9)))
+		stroke_thickness = 7
+		scale_log_base = 0.3
+	</plot>
+	<plot>
+		show = yes
+		type = histogram
+		file = unique_genes_per_mbp_mapped # uniq_genes_per_bin_mb
+		r0 = 1.01r
+		r1 = 1.06r
+		min = 0
+		max = 50 # 51 # 10 # 130
+		fill_color = vlgrey #black
+		color = black
+		stroke_thickness = 3
+	</plot>
+
+	### UNIQUE WHEAT GENES PER BIN / MB
+
+	<plot>
+		show = yes
+		type = heatmap
+		file = unique_wheat_genes_per_mbp_mapped # unique_wheat_genes_per_bin_mbp
+		r0 = 1.07r
+		r1 = 1.12r
+		min = 0
+		max = 50 # 42 #50
+		# color = eval(sprintf("oranges-9-seq", remap_round(counter(plot),0,50,1,9)))
+		color = eval(sprintf("ylorbr-9-seq", remap_round(counter(plot), 0, 50, 1, 9)))
+		stroke_thickness = 7
+		scale_log_base = 0.3
+	</plot>
+	<plot>
+		show = yes
+		type = histogram
+		file = unique_wheat_genes_per_mbp_mapped # unique_wheat_genes_per_bin_mbp
+		r0 = 1.07r
+		r1 = 1.12r
+		min = 0
+		max = 50 # 42 #50
+		color = black # vvdorange
+		fill_color = vvdorange
+		stroke_thickness = 3
+	</plot>
+
+	### GENE COUNTS PER BIN
+
+	<plot>
+		type = heatmap
+		file = genes_per_scaffold_mapped # gene_counts_per_bin
+		r0 = 1.13r #1.18r #1.13r
+		r1 = 1.23r
+		min = 0
+		max = 2400 # 1461
+		stroke_thickness = 7
+		color = eval(sprintf("orrd-9-seq", remap_round(counter(plot), 0, 2400, 1, 9)))
+		scale_log_base = 0.1
+	</plot>
+	<plot>
+		type = histogram
+		file = genes_per_scaffold_mapped # gene_counts_per_bin
+		r0 = 1.13r #1.18r #1.13r
+		r1 = 1.23r
+		min = 0
+		max = 2400 # 1461
+		stroke_thickness = 5
+		color = black
+                fill_color = vlorange
+	</plot>
+
+	### GENE COUNTS PER BIN / MB
+
+	<plot>
+		type = heatmap
+		file = genes_per_mbp_mapped # gene_counts_per_bin_mb
+		r0 = 1.24r
+		r1 = 1.34r #1.29r #1.34r
+		min = 0
+		max = 205 # 130
+		stroke_thickness = 7
+		# color = eval(sprintf("rdbu-9-div", remap_round(counter(plot), 0, 205, 1, 9)))
+		# color = eval(sprintf("pastel1-9-qual", remap_round(counter(plot), 0, 130, 1, 9)))
+		color = eval(sprintf("bugn-9-seq", remap_round(counter(plot), 0, 205, 1, 9)))
+		scale_log_base = 0.3
+	</plot>
+	<plot>
+		type = histogram
+		file = genes_per_mbp_mapped # gene_counts_per_bin_mb
+		r0 = 1.24r
+		r1 = 1.34r #1.29r #1.34r
+		min = 0
+		max = 205 # 130
+		stroke_thickness = 5
+		color = black 
+		fill_color = vlblue
+	</plot>
+
+	### DNA PER BIN / MB
+
+	<plot>
+		type = heatmap
+		file = dna_te_per_mbp_mapped # dna_per_bin_mb
+		r0 = 1.36r
+		r1 = 1.41r
+		min = 0
+		max = 1000 # 13000
+		stroke_thickness = 7
+		color = eval(sprintf("purples-9-seq", remap_round(counter(plot), 0, 1000, 1, 9)))
+		scale_log_base = 0.2
+	</plot>
+	<plot>
+		type = histogram
+		file = dna_te_per_mbp_mapped # dna_per_bin_mb
+		r0 = 1.36r
+		r1 = 1.41r
+		min = 0
+		max = 1000 # 13000
+		stroke_thickness = 5
+		color = black
+                fill_color = vlpurple
+	</plot>
+
+	### RETROTRANSPOSONS PER BIN / MB
+
+	<plot>
+		type = heatmap
+		file = retro_te_per_mbp_mapped # retro_per_bin_mb
+		r0 = 1.42r
+		r1 = 1.47r
+		min = 0
+		max = 1200 # 14000
+		stroke_thickness = 7
+		color = eval(sprintf("blues-9-seq", remap_round(counter(plot), 0, 1200, 1, 9)))
+		scale_log_base = 0.4
+	</plot>
+	<plot>
+		type = histogram
+		file = retro_te_per_mbp_mapped # retro_per_bin_mb
+		r0 = 1.42r
+		r1 = 1.47r
+		min = 0
+		max = 1200 # 14000
+		stroke_thickness = 5
+		color = black
+                fill_color = vlblue
+	</plot>
+
+	### TANDEM REPEATS PER BIN / MB
+
+
+	<plot>
+		type = heatmap
+		file = tandem_rep_per_mbp_mapped # tandem_rep_per_bin_mb
+		r0 = 1.48r
+		r1 = 1.53r
+		min = 0
+		max = 105 # 120
+		stroke_thickness = 7
+		color = eval(sprintf("greens-9-seq", remap_round(counter(plot), 0, 105, 1, 9)))
+		scale_log_base = 0.2
+	</plot>
+	<plot>
+		type = histogram
+		file = tandem_rep_per_mbp_mapped # tandem_rep_per_bin_mb
+		r0 = 1.48r
+		r1 = 1.53r
+		min = 0
+		max = 105 # 120
+		stroke_thickness = 5
+		color = black
+                fill_color = vlgreen
+	</plot>
+</plots>
+
+
+
+### ORTHOLOG and TRANSLOCATION LINKS
+
+<links>
+	<link>
+		show = yes 
+		file = real_triads.txt.revised # phc_groups_with_bins_pure_homeos
+		radius = 0.99r
+		bezier_radius = 0r
+		color = 247,227,188 # 220,220,220 #189,195,199 #247,227,188 #greys-7-seq-2 #238,204,136 #255,238,102 # greys-7-seq-2 f7e3bc f7dca7 b39f79
+		thickness = 10
+		flat = yes
+		crest = 1
+	</link>
+        <link>                                                                                                                          
+        	show = no
+        	file = final_set.vlinks_arm.2groups.revised 
+        	radius        = 0.99r
+        	bezier_radius = 0r
+        	color         = greens-9-seq-5 #8 # bupu-9-seq-7
+        	thickness     = 17
+        	flat = yes
+        	crest = 1
+        </link>
+        <link>                                                                                                                          
+        	show = yes
+        	file = final_set.vlinks_arm.1AL_6AL.revised
+        	radius        = 0.99r
+        	bezier_radius = 0r
+        	color         = greens-9-seq-7 #8 # bupu-9-seq-7
+        	thickness     = 17
+        	flat = yes
+        	crest = 1
+        </link>
+        <link>                                                                                                                          
+        	show = yes
+        	file = final_set.vlinks_arm.6AL_4AS.revised
+        	radius        = 0.99r
+        	bezier_radius = 0r
+        	color         = greens-9-seq-7 #8 # bupu-9-seq-7
+        	thickness     = 17
+        	flat = yes
+        	crest = 1
+        </link>
+        <link>                                                                                                                          
+        	show = yes
+        	file = final_set.vlinks_arm.7BL_3B.revised 
+        	radius        = 0.99r
+        	bezier_radius = 0r
+        	color         = greens-9-seq-7 #8 # bupu-9-seq-7
+        	thickness     = 17
+        	flat = yes
+        	crest = 1
+        </link>
+	<link>
+		show = yes
+		file = final_set.vlinks_arm.7DL_3DS.revised #.not_checked  # non_transposon_mapped_genes.sorted.translocs.vlinks.5B_4B
+		radius        = 0.99r
+		bezier_radius = 0r
+		color         = greens-9-seq-9 #8 # bupu-9-seq-7
+		thickness     = 17
+		flat = yes
+		crest = 1
+	</link>
+ 
+
+
+
+
+
+
+
+
+
+	<link>
+		show = yes 
+		file = final_set.vlinks_arm.5AL_4AL.revised # final_set.vlinks.5A_4A  # non_transposon_mapped_genes.sorted.translocs.vlinks.4A_7B
+		radius        = 0.99r
+		bezier_radius = 0r
+		color         = 255,176,0 # ffd073 #greens-7-seq-2
+		thickness     = 20
+		flat = yes
+		crest = 1
+	</link>
+	<link>
+		show = yes
+		file = final_set.vlinks_arm.4AL_5AL.revised  # non_transposon_mapped_genes.sorted.translocs.vlinks.5A_4A
+		radius        = 0.99r
+		bezier_radius = 0r
+		color         = 255,191,64 # ffbf40 #greens-7-seq-3
+		thickness     = 20
+		flat = yes
+		crest = 1
+	</link>
+	<link>
+		show = yes
+		file = final_set.vlinks_arm.7BS_4AL.revised  # non_transposon_mapped_genes.sorted.translocs.vlinks.4A_5A
+		radius        = 0.99r
+		bezier_radius = 0r
+		color         = 255,208,115 # ffaa00 #greens-7-seq-4
+		thickness     = 20
+		flat = yes
+		crest = 1
+	</link>
+	<link>
+		show = yes
+		file = final_set.vlinks_arm.5AL_7BS.revised  # non_transposon_mapped_genes.sorted.translocs.vlinks.4A_5A
+		radius        = 0.99r
+		bezier_radius = 0r
+		color         = 255,236,115 # ffaa00 #greens-7-seq-4
+		thickness     = 20
+		flat = yes
+		crest = 1
+	</link>
+        <link>
+                show = yes
+                file = final_set.vlinks_arm.5BL_4BS.revised # final_set.vlinks.5A_1A  # non_transposon_mapped_genes.sorted.translocs.vlinks.4B_5B
+                radius        = 0.99r
+                bezier_radius = 0r
+                color         = 28,169,201 # greens-9-seq-7 # bupu-9-seq-8
+                thickness     = 17
+                flat = yes
+                crest = 1
+        </link>
+
+</links>
+
+
+
+
+
+
+################################################################
+# The remaining content is standard and required. It is imported
+# from default files in the Circos distribution.
+#
+# These should be present in every Circos configuration file and
+# overridden as required. To see the content of these files,
+# look in etc/ in the Circos distribution.
+
+<image>
+# Included from Circos distribution.
+<<include /etc/image.conf>>
+
+radius* = 3000p
+
+</image>
+
+# RGB/HSV color definitions, color lists, location of fonts, fill patterns.
+# Included from Circos distribution.
+<<include /etc/colors_fonts_patterns.conf>>
+
+# Debugging, I/O an dother system parameters
+# Included from Circos distribution.
+<<include /etc/housekeeping.conf>>
